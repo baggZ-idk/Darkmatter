@@ -27,6 +27,15 @@
     "download_url": "https://git.hamburbur.org/ZlothY/Zlothy-Nametag/releases/download/latest/ZlothyNametag.dll"
   },
   {
+    "Name": "Forever CosmetXX",
+    "Author": "poopooVR",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "ForeverCosmetxx",
+    "Group": "Cosmetic",
+    "download_url": "https://github.com/iiDkRemastered/ForeverCosmetxx/releases/download/latest/ForeverCosmetx.dll"
+  },
+  {
     "Name": "Too Much Info",
     "Author": "ZlothY",
     "Dependencies": [],
