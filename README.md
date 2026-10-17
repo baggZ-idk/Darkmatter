@@ -13,10 +13,10 @@ built over [AvaloniaUI](https://avaloniaui.net/)!
 - Mod lists are configurable
 
 ## Download
-| Platform | Link                                                                                            |
-| -------- | ----------------------------------------------------------------------------------------------- |
-| Windows  | https://github.com/arielthemonke/MonkeModManager/releases/latest/download/MonkeModManager.exe   |
-| Linux    | https://github.com/arielthemonke/MonkeModManager/releases/latest/download/MonkeModManager.Linux |
+| Platform | Link                                                                              |
+| -------- | ----------------------------------------------------------------------------------|
+| Windows  | https://github.com/baggZ-idk/Darkmatter/releases/latest/download/Darkmatter.exe   |
+| Linux    | https://github.com/baggZ-idk/Darkmatter/releases/latest/download/Darkmatter.Linux |
 
 ## Appearance
 ### Light Mode:
@@ -29,7 +29,8 @@ And many more!
 Pull requests are more than welcome! I will accept most of them!
 
 ## Credits
-Ariel The Monke - Main Development </br>
+baggZ - Main Developer </br>
+Ariel The Monke - Original Developer </br>
 Toast Concern - Ideas + [#2](https://github.com/arielthemonke/MonkeModManager/pull/2)</br>
 Kurplunk - [#3](https://github.com/arielthemonke/MonkeModManager/pull/3)</br>
 Google Fonts - The Icons (notifications + menu icons licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.txt))
