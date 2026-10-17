@@ -22,7 +22,7 @@
   {
     "Name": "ZlothY Nametag",
     "Author": "ZlothY",
-    "Version": "",
+    "Version": "1.5.3",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Zlothy-Nametag",
@@ -77,6 +77,16 @@
     "install_location": "BepInEx/plugins",
     "git_path": "Sentinel",
     "Group": "Mod Checker",
+    "download_url": "https://github.com/gorillan0t/Sentinel/releases/latest/download/SentinelClient.dll"
+  },
+  {
+    "Name": "Automatic Reporting System(ARS)",
+    "Author": "Industry",
+    "Version": "1.2.1",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "ARS-Files",
+    "Group": "Quality of Life",
     "download_url": "https://github.com/gorillan0t/Sentinel/releases/latest/download/SentinelClient.dll"
   }
 ]
