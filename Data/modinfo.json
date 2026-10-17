@@ -88,6 +88,6 @@
     "install_location": "BepInEx/plugins",
     "git_path": "ARS-Files",
     "Group": "Quality of Life",
-    "download_url": "https://github.com/gorillan0t/ARS-Files/releases/latest/download/ARS.dll"
+    "download_url": "https://github.com/AutoReportSystem/ARS-Files/releases/latest/download/ARS.dll"
   }
 ]
