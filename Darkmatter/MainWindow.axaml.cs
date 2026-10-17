@@ -905,12 +905,14 @@ public partial class MainWindow : Window
             default:
                 return group?.ToLower() switch
                 {
-                    "core" => Brushes.DarkBlue,
                     "libraries" => Brushes.Purple,
-                    "tweaks" => Brushes.Green,
                     "mod menu" => Brushes.Orange,
+                    "cosmetic" => Brushes.HotPink,
+                    "competitive" => Brushes.Red,
+                    "gameplay" => Brushes.Green,
+                    "quality of life" => Brushes.DodgerBlue,
+                    "mod checker" => Brushes.Yellow,
                     _ => Brushes.LightGray
-                    // im colour blind so hope I didnt do stupid things
                 };
         }
     }

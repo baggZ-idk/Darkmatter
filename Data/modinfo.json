@@ -1,22 +1,82 @@
 [
   {
     "Name": "hamburbur",
-    "Author": "hamburbur org",
+    "Author": "ZlothY",
     "Version": "7.3.1",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "hamburbur",
-    "Group": "mod menu",
+    "Group": "Mod Menu",
     "download_url": "https://github.com/hamburbur-org/hamburbur/releases/latest/download/hamburbur.dll"
   },
   {
     "Name": "GorillaNotifications",
-    "Author": "hamburbur org",
+    "Author": "ZlothY",
     "Version": "1.0.2",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Gorilla-Notifications",
-    "Group": "libraries",
+    "Group": "Libraries",
     "download_url": "https://github.com/hamburbur-org/Gorilla-Notifications/releases/latest/download/GorillaNotifications.dll"
+  },
+  {
+    "Name": "ZlothY Nametag",
+    "Author": "ZlothY",
+    "Version": "",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "Zlothy-Nametag",
+    "Group": "Cosmetic",
+    "download_url": "https://git.hamburbur.org/ZlothY/Zlothy-Nametag/releases/download/latest/ZlothyNametag.dll"
+  },
+  {
+    "Name": "Too Much Info",
+    "Author": "ZlothY",
+    "Version": "1.2.1",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "TooMuchInfoHanFork",
+    "Group": "Cosmetic",
+    "download_url": "https://git.hamburbur.org/ZlothY/TooMuchInfo/releases/download/latest/TooMuchInfo.dll"
+  },
+  {
+    "Name": "Casting Should Be Free",
+    "Author": "ZlothY",
+    "Version": "1.2.0",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "Casting-Should-Be-Free",
+    "Group": "Competitive",
+    "download_url": "https://github.com/hamburbur-org/Casting-Should-Be-Free/releases/download/latest/CastingShouldBeFree.dll"
+  },
+  {
+    "Name": "Walk Simulator",
+    "Author": "ZlothY",
+    "Version": "1.0.9",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "WalkSimulator",
+    "Group": "Gameplay",
+    "download_url": "https://git.hamburbur.org/ZlothY/WalkSimulator/releases/download/latest/WalkSimulator.dll"
+  },
+  {
+    "Name": "ZlothY Dances",
+    "Author": "ZlothY",
+    "Version": "2.1.0",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "ZlothYDances",
+    "Group": "Gameplay",
+    "download_url": "https://git.hamburbur.org/ZlothY/ZlothYDances/releases/download/latest/ZlothYDances.dll"
+  },
+  {
+    "Name": "Sentinel",
+    "Author": "ZlothY & Not",
+    "Version": "1.1.0",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "Sentinel",
+    "Group": "Mod Checker",
+    "download_url": "https://github.com/gorillan0t/Sentinel/releases/latest/download/SentinelClient.dll"
   }
 ]
