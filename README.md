@@ -18,13 +18,6 @@ built over [AvaloniaUI](https://avaloniaui.net/)!
 | Windows  | https://github.com/baggZ-idk/Darkmatter/releases/latest/download/Darkmatter.exe   |
 | Linux    | https://github.com/baggZ-idk/Darkmatter/releases/latest/download/Darkmatter.Linux |
 
-## Appearance
-### Light Mode:
-![light mode](https://github.com/arielthemonke/MonkeModManager/blob/main/Assets/light-showcase.png?raw=true)
-### Dark Mode:
-![dark-showcase](https://github.com/arielthemonke/MonkeModManager/blob/main/Assets/dark-showcase.png?raw=true)
-And many more!
-
 ## Contribution
 Pull requests are more than welcome! I will accept most of them!
 
