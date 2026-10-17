@@ -760,26 +760,26 @@ public partial class MainWindow : Window
             await InstallMod(mod, installButton, statusText);
         };
 
-        Button uninstallButton = null;
-        if (isInstalled)
+        var uninstallButton = new Button
         {
-            uninstallButton = new Button
-            {
-                Content = "Uninstall",
-                Background = Brushes.Red,
-                Foreground = Brushes.White,
-                Padding = new Thickness(16, 8),
-                CornerRadius = new CornerRadius(4)
-            };
+            Content = "Uninstall",
+            Background = Brushes.Red,
+            Foreground = Brushes.White,
+            Padding = new Thickness(16, 8),
+            CornerRadius = new CornerRadius(4),
+            IsVisible = isInstalled
+        };
 
-            uninstallButton.Click += async (s, e) =>
-            {
-                await UninstallMod(mod, installButton, uninstallButton, statusText);
-            };
+        uninstallButton.Click += async (s, e) =>
+        {
+            await UninstallMod(
+                mod,
+                installButton,
+                uninstallButton,
+                statusText);
+        };
 
-            buttonStack.Children.Add(uninstallButton);
-        }
-
+        buttonStack.Children.Add(uninstallButton);
         buttonStack.Children.Add(installButton);
 
         Grid.SetColumn(contentStack, 0);
@@ -1063,6 +1063,8 @@ public partial class MainWindow : Window
         }
     }
 
+
+
     private async Task InstallMod(Mod mod, Button installButton, TextBlock statusText, Mod ModSender = null)
     {
         if (mod == null)
@@ -1075,132 +1077,147 @@ public partial class MainWindow : Window
                 installButton.IsEnabled = false;
                 installButton.Content = "Installing...";
             }
+
             MessageBox0.Text = $"Installing {mod.Name}...";
 
-            var installLocation = !string.IsNullOrEmpty(mod.InstallLocation) 
+            var installLocation = !string.IsNullOrEmpty(mod.InstallLocation)
                 ? mod.InstallLocation
                 : "BepInEx/plugins";
-            
+
             var targetDirectory = Path.Combine(gamePath, installLocation);
-            if (!Directory.Exists(targetDirectory))
-            {
-                Directory.CreateDirectory(targetDirectory);
-            }
+            Directory.CreateDirectory(targetDirectory);
 
             var downloadUrl = mod.DownloadUrl;
             if (string.IsNullOrEmpty(downloadUrl))
-            {
                 throw new InvalidOperationException("Mod download URL is empty");
-            }
 
             var uri = new Uri(downloadUrl);
             var fileName = Path.GetFileName(uri.LocalPath);
-            
+
             if (string.IsNullOrEmpty(fileName))
-            {
                 fileName = $"{mod.Name}.dll";
-            }
 
             var downloadPath = await DownloadFile(downloadUrl, fileName);
 
             if (fileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
             {
                 var installedFiles = new List<string>();
-                
+
                 using (var archive = ZipFile.OpenRead(downloadPath))
                 {
                     foreach (var entry in archive.Entries)
                     {
                         if (string.IsNullOrEmpty(entry.Name))
                             continue;
+
                         var entryPath = entry.FullName.Replace('\\', '/');
+
                         if (entryPath.Contains("../") || Path.IsPathRooted(entryPath))
                             continue;
 
                         var destinationPath = Path.Combine(targetDirectory, entry.FullName);
                         var fullDestinationPath = Path.GetFullPath(destinationPath);
                         var fullTargetPath = Path.GetFullPath(targetDirectory);
-                        
-                        if (!fullDestinationPath.StartsWith(fullTargetPath, StringComparison.OrdinalIgnoreCase))
+
+                        if (!fullDestinationPath.StartsWith(
+                                fullTargetPath + Path.DirectorySeparatorChar,
+                                StringComparison.OrdinalIgnoreCase)
+                            && !string.Equals(
+                                fullDestinationPath,
+                                fullTargetPath,
+                                StringComparison.OrdinalIgnoreCase))
                             continue;
 
                         var directory = Path.GetDirectoryName(destinationPath);
-                        
-                        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                        {
+
+                        if (!string.IsNullOrEmpty(directory))
                             Directory.CreateDirectory(directory);
-                        }
 
                         entry.ExtractToFile(destinationPath, overwrite: true);
-                        var relativePath = Path.GetRelativePath(targetDirectory, destinationPath);
-                        installedFiles.Add(relativePath);
+
+                        installedFiles.Add(
+                            Path.GetRelativePath(targetDirectory, destinationPath));
                     }
                 }
-                
-                var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var trackingFile = Path.Combine(appData, "Darkmatter", $".{mod.Name}_installed.txt");
+
+                var appData = Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData);
+
+                var trackingDirectory = Path.Combine(appData, "Darkmatter");
+                Directory.CreateDirectory(trackingDirectory);
+
+                var trackingFile = Path.Combine(
+                    trackingDirectory, $".{mod.Name}_installed.txt");
+
                 await File.WriteAllLinesAsync(trackingFile, installedFiles);
-                
+
                 if (File.Exists(downloadPath))
-                {
                     File.Delete(downloadPath);
-                }
             }
             else
             {
                 var modFolder = Path.Combine(targetDirectory, mod.Name);
-                if (!Directory.Exists(modFolder))
-                {
-                    Directory.CreateDirectory(modFolder);
-                }
+                Directory.CreateDirectory(modFolder);
 
                 var targetPath = Path.Combine(modFolder, fileName);
 
                 if (File.Exists(targetPath))
-                {
                     File.Delete(targetPath);
-                }
 
                 File.Move(downloadPath, targetPath);
             }
 
             statusText.Text = "✓ Installed";
             statusText.Foreground = Brushes.Green;
+
             installButton.Content = "Reinstall";
             installButton.Background = Brushes.Orange;
+
+            var modEntry = modBorders.FirstOrDefault(
+                x => x.ModAssigned.Name == mod.Name);
+
+            if (modEntry?.UninstallButton != null)
+                modEntry.UninstallButton.IsVisible = true;
 
             MessageBox0.Text = $"Successfully installed {mod.Name}!";
         }
         catch (Exception ex)
         {
             await ShowErrorMessage($"Failed to install {mod.Name}: {ex.Message}");
-            
+
             statusText.Text = "Installation failed";
             statusText.Foreground = Brushes.Red;
+    
             installButton.Content = "Install";
             installButton.Background = Brushes.Green;
         }
         finally
         {
-            installButton.IsEnabled = true;
+            if (installButton != null)
+                installButton.IsEnabled = true;
         }
-        if (mod.Dependencies.Any())
+
+        if (mod.Dependencies?.Any() == true)
         {
             foreach (var dependency in mod.Dependencies)
             {
-                foreach (var modBorder in modBorders)
+                foreach (var modBorder in modBorders.ToList())
                 {
-                    if (modBorder.ModAssigned != ModSender)
+                    if (modBorder.ModAssigned != ModSender &&
+                        modBorder.ModAssigned.Name == dependency)
                     {
-                        if (modBorder.ModAssigned.Name == dependency)
-                        {
-                            await InstallMod(modBorder.ModAssigned, modBorder.InstallButton, modBorder.StatusText, mod);
-                        }
+                        await InstallMod(
+                            modBorder.ModAssigned,
+                            modBorder.InstallButton,
+                            modBorder.StatusText,
+                            mod);
                     }
                 }
             }
         }
     }
+
+
 
     private async Task UninstallMod(Mod mod, Button installButton, Button uninstallButton, TextBlock statusText)
     {
@@ -1342,7 +1359,7 @@ public partial class MainWindow : Window
 
                 if (uninstallButton.Parent is StackPanel parent)
                 {
-                    parent.Children.Remove(uninstallButton);
+                    uninstallButton.IsVisible = false;
                 }
 
                 MessageBox0.Text = $"Successfully uninstalled {mod.Name}!";
