@@ -10,7 +10,7 @@ built over [AvaloniaUI](https://avaloniaui.net/)!
 - Launching the game from the manager(limited to steam only though)
 - Config Editor(allows you to configure mods right within the manager)
 - Disable/Enable mods(if you want to go back to vanilla while keeping your mods)
-- Pulls mods from our own list
+- Mod lists are configurable
 
 ## Download
 | Platform | Link                                                                                            |
