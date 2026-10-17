@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MonkeModManager;
+namespace Darkmatter;
 public class Notification
 {
     public string Title { get; }

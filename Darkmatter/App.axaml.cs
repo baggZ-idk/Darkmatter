@@ -4,7 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 
-namespace MonkeModManager;
+namespace Darkmatter;
 
 public partial class App : Application
 {

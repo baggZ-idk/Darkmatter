@@ -3,10 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MonkeModManager.MainWindow"
-        Title="MonkeModManager"
+        x:Class="Darkmatter.MainWindow"
+        Title="Darkmatter"
         MinWidth="600" MinHeight="400"
-        Icon="avares://MonkeModManager/Assets/mmm-ico.png"
+        Icon="avares://Darkmatter/Assets/mmm-ico.png"
         Name="MainWin"
         >
 
@@ -18,18 +18,13 @@
                         <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" 
-                          Text="Monke Mod Manager" 
+                          Text="Darkmatter" 
                           Name="TitleText"
                           FontSize="24" 
                           FontWeight="Bold"
                           HorizontalAlignment="Center" 
                           Margin="10,15,10,10" 
                           Foreground="DarkBlue" />
-                <Image Grid.Row="0" 
-                       Source="Assets/mmm-ico.png"
-                       Height="38"
-                       Width="38"
-                       Margin="0, 0, 280, 0"></Image>
                 <Button Grid.Row="0" Name="DropDownBtn" 
                         Margin="10"
                         Background="Transparent"

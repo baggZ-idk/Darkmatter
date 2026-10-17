@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace MonkeModManager;
+namespace Darkmatter;
 
 class Program
 {

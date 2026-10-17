@@ -23,7 +23,7 @@ using Newtonsoft.Json;
 using Button = Avalonia.Controls.Button;
 #endregion
 
-namespace MonkeModManager;
+namespace Darkmatter;
 
 public partial class MainWindow : Window
 {
@@ -110,7 +110,7 @@ public partial class MainWindow : Window
         }
         pluginsPath = Path.Combine(gamePath, "BepInEx", "plugins");
 
-        var (updateAvailable, newVersion) = await IsUpdateAvailable(new Version(1, 4, 1));
+        var (updateAvailable, newVersion) = await IsUpdateAvailable(new Version(1, 0, 0));
 
         if (updateAvailable)
         {
@@ -118,13 +118,12 @@ public partial class MainWindow : Window
         }
         CurrentTheme = GetTheme();
         InitUI();
-
-        InitForRPC();
+        
         await CheckOrInstallBepInEx();
         await LoadModsFromTheNewGitHubRepoAsync();
         MakeNotificationThing();
         SendNeededMesages();
-        MenuImage.Source = new Bitmap(AssetLoader.Open(new Uri("avares://MonkeModManager/Assets/menu-google.png")));
+        MenuImage.Source = new Bitmap(AssetLoader.Open(new Uri("avares://Darkmatter/Assets/menu-google.png")));
     }
 
     void SendNeededMesages()
@@ -163,7 +162,7 @@ public partial class MainWindow : Window
         {
             Width = 150,
             Height = 150,
-            Source = new Bitmap(AssetLoader.Open(new Uri("avares://MonkeModManager/Assets/mmm-ico.png"))),
+            Source = new Bitmap(AssetLoader.Open(new Uri("avares://Darkmatter/Assets/mmm-ico.png"))),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -194,11 +193,11 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.Light => Brush.Parse("#FFFFFF"),
-            MonkeModManager.Theme.Dark => Brush.Parse("#121212"),
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#000000"),
-            MonkeModManager.Theme.Sunrise => Brush.Parse("#F5E0C3"),
-            MonkeModManager.Theme.Frost => Brush.Parse("#D0E1F9"),
+            Darkmatter.Theme.Light => Brush.Parse("#FFFFFF"),
+            Darkmatter.Theme.Dark => Brush.Parse("#121212"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#000000"),
+            Darkmatter.Theme.Sunrise => Brush.Parse("#F5E0C3"),
+            Darkmatter.Theme.Frost => Brush.Parse("#D0E1F9"),
             _ => Brush.Parse("#FFFFFF")
         };
     }
@@ -207,11 +206,11 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.Light => Brush.Parse("#E0E0E0"),
-            MonkeModManager.Theme.Dark => Brush.Parse("#2C2C2C"),
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
-            MonkeModManager.Theme.Sunrise => Brush.Parse("#D7CCC8"),
-            MonkeModManager.Theme.Frost => Brush.Parse("#90A4AE"),
+            Darkmatter.Theme.Light => Brush.Parse("#E0E0E0"),
+            Darkmatter.Theme.Dark => Brush.Parse("#2C2C2C"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
+            Darkmatter.Theme.Sunrise => Brush.Parse("#D7CCC8"),
+            Darkmatter.Theme.Frost => Brush.Parse("#90A4AE"),
             _ => Brushes.Black
         };
     }
@@ -220,11 +219,11 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.Light => Brush.Parse("#F9F9F9"),
-            MonkeModManager.Theme.Dark => Brush.Parse("#1F1F1F"),
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#000000"),
-            MonkeModManager.Theme.Sunrise => Brush.Parse("#FFE0B2"),
-            MonkeModManager.Theme.Frost => Brush.Parse("#BBDEFB"),
+            Darkmatter.Theme.Light => Brush.Parse("#F9F9F9"),
+            Darkmatter.Theme.Dark => Brush.Parse("#1F1F1F"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#000000"),
+            Darkmatter.Theme.Sunrise => Brush.Parse("#FFE0B2"),
+            Darkmatter.Theme.Frost => Brush.Parse("#BBDEFB"),
             _ => Brush.Parse("#FFFFFF")
         };
     }
@@ -233,11 +232,11 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.Light => Brush.Parse("#212121"),
-            MonkeModManager.Theme.Dark => Brush.Parse("#E0E0E0"),
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
-            MonkeModManager.Theme.Sunrise => Brush.Parse("#6D4C41"),
-            MonkeModManager.Theme.Frost => Brush.Parse("#0D47A1"),
+            Darkmatter.Theme.Light => Brush.Parse("#212121"),
+            Darkmatter.Theme.Dark => Brush.Parse("#E0E0E0"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
+            Darkmatter.Theme.Sunrise => Brush.Parse("#6D4C41"),
+            Darkmatter.Theme.Frost => Brush.Parse("#0D47A1"),
             _ => Brush.Parse("#FFFFFF")
         };
     }
@@ -246,7 +245,7 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#000000"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#000000"),
             _ => Brush.Parse("#FFFFFF")
         };
     }
@@ -255,57 +254,13 @@ public partial class MainWindow : Window
     {
         return GetTheme() switch
         {
-            MonkeModManager.Theme.Light => Brush.Parse("#666666"),
-            MonkeModManager.Theme.Dark => Brush.Parse("#B0B0B0"),
-            MonkeModManager.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
-            MonkeModManager.Theme.Sunrise => Brush.Parse("#6D4C41"),
-            MonkeModManager.Theme.Frost => Brush.Parse("#546E7A"),
+            Darkmatter.Theme.Light => Brush.Parse("#666666"),
+            Darkmatter.Theme.Dark => Brush.Parse("#B0B0B0"),
+            Darkmatter.Theme.DarkHighContrast => Brush.Parse("#FFFFFF"),
+            Darkmatter.Theme.Sunrise => Brush.Parse("#6D4C41"),
+            Darkmatter.Theme.Frost => Brush.Parse("#546E7A"),
             _ => Brush.Parse("#FFFFFF")
         };
-    }
-    void InitForRPC()
-    {
-        client = new DiscordRpcClient("1389965977705513010");
-
-        client.OnReady += (sender, e) =>
-        {
-            Console.WriteLine($"[DiscordRPC] - Connected to Discord as {e.User.Username}");
-            client.SetPresence(new RichPresence
-            {
-                Buttons = new[]
-                {
-                    new DiscordRPC.Button
-                    {
-                        Label = "Install Mods too",
-                        Url = "https://github.com/arielthemonke/MonkeModManager/releases/latest"
-                    },
-                },
-                Details = "Modding",
-                State = "Installing Mods",
-                Assets = new Assets
-                {
-                    LargeImageKey = "mmm_ico",
-                }
-            });
-            Console.WriteLine($"[DiscordRPC] - RPC Set");
-        };
-
-        client.OnError += (sender, e) =>
-        {
-            Console.WriteLine($"[ERROR][DiscordRPC] - {e.Message}");
-        };
-        
-        client.OnConnectionFailed += (sender, e) =>
-        {
-            Console.WriteLine($"[ERROR][DiscordRPC] - Connection failed: {e}");
-        };
-
-        client.OnConnectionEstablished += (sender, e) =>
-        {
-            Console.WriteLine("[DiscordRPC] - RPC Connection established");
-        };
-
-        client.Initialize();
     }
 
     public static async Task<(bool UpdateAvailable, Version LatestVersion)> IsUpdateAvailable(Version currentVersion)
@@ -315,7 +270,7 @@ public partial class MainWindow : Window
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "ModManager");
 
-            string url = "https://raw.githubusercontent.com/arielthemonke/MonkeModManager/main/version";
+            string url = "https://raw.githubusercontent.com/arielthemonke/Darkmatter/main/version";
             string response = await client.GetStringAsync(url);
             var latestVersion = Version.Parse(response);
 
@@ -332,7 +287,7 @@ public partial class MainWindow : Window
     private static string GetConfigPath()
     {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var folder = Path.Combine(appData, "MonkeModManager");
+        var folder = Path.Combine(appData, "Darkmatter");
         Directory.CreateDirectory(folder);
         return Path.Combine(folder, "config.json");
     }
@@ -344,7 +299,7 @@ public partial class MainWindow : Window
             var configPath = GetConfigPath();
             if (!File.Exists(configPath))
             {
-                var defaultConfig = new Config { Theme = MonkeModManager.Theme.Light };
+                var defaultConfig = new Config { Theme = Darkmatter.Theme.Light };
                 File.WriteAllText(configPath, JsonConvert.SerializeObject(defaultConfig, Formatting.Indented));
                 return defaultConfig.Theme;
             }
@@ -358,13 +313,13 @@ public partial class MainWindow : Window
             }
             else
             {
-                return MonkeModManager.Theme.Light;
+                return Darkmatter.Theme.Light;
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading theme: {ex}");
-            return MonkeModManager.Theme.Light;
+            return Darkmatter.Theme.Light;
         }
     }
     #endregion
@@ -867,7 +822,7 @@ public partial class MainWindow : Window
             BorderBrush = null,
             Content = new Image
             {
-                Source = new Bitmap(AssetLoader.Open(new Uri("avares://MonkeModManager/Assets/doorbell-google.png"))),
+                Source = new Bitmap(AssetLoader.Open(new Uri("avares://Darkmatter/Assets/doorbell-google.png"))),
                 Width = 28,
                 Height = 28,
                 Stretch = Stretch.Uniform
@@ -985,7 +940,7 @@ public partial class MainWindow : Window
     {
         switch (CurrentTheme)
         {
-            case MonkeModManager.Theme.DarkHighContrast:
+            case Darkmatter.Theme.DarkHighContrast:
                 return group?.ToLower() switch
                 {
                     _ => Brush.Parse("#FFFFFF")
@@ -995,9 +950,8 @@ public partial class MainWindow : Window
                 {
                     "core" => Brushes.DarkBlue,
                     "libraries" => Brushes.Purple,
-                    "gameplay" => Brushes.Green,
-                    "cosmetic" => Brushes.Pink,
-                    "utility" => Brushes.Orange,
+                    "tweaks" => Brushes.Green,
+                    "mod menu" => Brushes.Orange,
                     _ => Brushes.LightGray
                     // im colour blind so hope I didnt do stupid things
                 };
@@ -1036,7 +990,7 @@ public partial class MainWindow : Window
             if (fileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
             {
                 var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var trackingFile = Path.Combine(appData, "MonkeModManager", $".{mod.Name}_installed.txt");
+                var trackingFile = Path.Combine(appData, "Darkmatter", $".{mod.Name}_installed.txt");
                 return File.Exists(trackingFile);
             }
             else
@@ -1163,7 +1117,7 @@ public partial class MainWindow : Window
                 }
                 
                 var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var trackingFile = Path.Combine(appData, "MonkeModManager", $".{mod.Name}_installed.txt");
+                var trackingFile = Path.Combine(appData, "Darkmatter", $".{mod.Name}_installed.txt");
                 await File.WriteAllLinesAsync(trackingFile, installedFiles);
                 
                 if (File.Exists(downloadPath))
@@ -1262,7 +1216,7 @@ public partial class MainWindow : Window
                 if (fileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
                 {
                     var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    var trackingFile = Path.Combine(appData, "MonkeModManager", $".{mod.Name}_installed.txt");
+                    var trackingFile = Path.Combine(appData, "Darkmatter", $".{mod.Name}_installed.txt");
                     
                     if (File.Exists(trackingFile))
                     {
@@ -1850,7 +1804,7 @@ public partial class MainWindow : Window
         };
         installBtn.Click += async (sender, e) =>
         {
-            var url = "https://github.com/arielthemonke/MonkeModManager/releases/latest";
+            var url = "https://github.com/arielthemonke/Darkmatter/releases/latest";
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         };
 
@@ -1873,12 +1827,6 @@ public partial class MainWindow : Window
     #region cant think of name
     protected override void OnClosed(EventArgs e)
     {
-        Console.WriteLine("[DiscordRPC] - Disposing.........");
-        httpClient?.Dispose();
-        client?.ClearPresence();
-        client?.Deinitialize();
-        client?.Dispose();
-        Console.WriteLine("[DiscordRPC] - Disposed");
         base.OnClosed(e);
     }
 

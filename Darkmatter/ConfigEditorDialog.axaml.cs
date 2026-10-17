@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 
-namespace MonkeModManager;
+namespace Darkmatter;
 
 public partial class ConfigEditorDialog : Window
 {

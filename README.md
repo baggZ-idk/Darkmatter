@@ -1,4 +1,4 @@
-# Monke Mod Manager
+# Darkmatter
 A simple, fast, and cross-platform mod manager for "Gorilla Tag" mods.  
 Easily download, install, update, and manage your favorite mods with one click.
 built over [AvaloniaUI](https://avaloniaui.net/)!
@@ -10,7 +10,7 @@ built over [AvaloniaUI](https://avaloniaui.net/)!
 - Launching the game from the manager(limited to steam only though)
 - Config Editor(allows you to configure mods right within the manager)
 - Disable/Enable mods(if you want to go back to vanilla while keeping your mods)
-- Pulls mods from [The-Graze Mod List](https://github.com/The-Graze/MonkeModInfo) which gets updated all the time so no broken mods!
+- Pulls mods from our own list
 
 ## Download
 | Platform | Link                                                                                            |

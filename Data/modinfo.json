@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "hamburbur",
+    "Author": "ZlothY",
+    "Version": "7.3.1",
+    "Dependencies": [],
+    "install_location": "BepInEx/plugins",
+    "git_path": "hamburbur",
+    "Group": "mod menu",
+    "download_url": "https://github.com/hamburbur-org/hamburbur/releases/latest/download/hamburbur.dll"
+  }
+]
