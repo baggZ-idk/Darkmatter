@@ -33,7 +33,7 @@
     "install_location": "BepInEx/plugins",
     "git_path": "ForeverCosmetxx",
     "Group": "Cosmetic",
-    "download_url": "https://github.com/iiDkRemastered/ForeverCosmetxx/releases/download/latest/ForeverCosmetx.dll"
+    "download_url": "https://github.com/iiDkRemastered/ForeverCosmetxx/releases/latest/download/ForeverCosmetx.dll"
   },
   {
     "Name": "Too Much Info",
