@@ -42,6 +42,7 @@
                                         <MenuItem Name="DisableEnable" Click="DisableAll_OnClick"/>
                                         <MenuItem Header="Reset Game Path" Click="ResetGamePath_OnClick"/>
                                         <MenuItem Header="Config Editor" Click="Config_OnClick"/>
+                                        <MenuItem Header="Manage Repositories" Click="ManageRepositories_OnClick"/>
                                         <!--<MenuItem Header="Install All Mods" Click="InstallAll"/>-->
                                 </ContextMenu>
                         </Button.ContextMenu>

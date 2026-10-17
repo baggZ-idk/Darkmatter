@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Darkmatter.RepositoriesWindow"
+        Title="Manage Repositories"
+        Width="600"
+        Height="450"
+        MinWidth="450"
+        MinHeight="300"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Styles>
+        <Style Selector="Button.accent">
+            <Setter Property="Background" Value="#3F51B5"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.accent:pointerover">
+            <Setter Property="Background" Value="#536DFE"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid x:Name="RootGrid" RowDefinitions="Auto,*,Auto" Margin="16">
+        
+        <StackPanel Grid.Row="0" Spacing="8">
+            <TextBlock Text="Add Repository" FontSize="18" FontWeight="Bold"/>
+
+            <TextBox x:Name="RepositoryNameBox"
+                     Watermark="Repository name"/>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBox x:Name="RepositoryUrlBox"
+                         Watermark="https://raw.githubusercontent.com/user/repo/main/modinfo.json"/>
+
+                <Button Grid.Column="1"
+                        Margin="8,0,0,0"
+                        Content="Add"
+                        Click="AddRepository_Click"/>
+            </Grid>
+        </StackPanel>
+
+
+        <ScrollViewer Grid.Row="1" Margin="0,16">
+            <StackPanel x:Name="RepositoryList" Spacing="8"/>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="8">
+            <Button Content="Cancel" Click="Cancel_Click"/>
+            <Button Content="Save"
+                    Classes="accent"
+                    Click="Save_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

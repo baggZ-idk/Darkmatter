@@ -2,8 +2,7 @@
   {
     "Name": "hamburbur",
     "Author": "ZlothY",
-    "Version": "7.3.1",
-    "Dependencies": [],
+    "Dependencies": [ "GorillaNotifications" ],
     "install_location": "BepInEx/plugins",
     "git_path": "hamburbur",
     "Group": "Mod Menu",
@@ -12,7 +11,6 @@
   {
     "Name": "GorillaNotifications",
     "Author": "ZlothY",
-    "Version": "1.0.2",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Gorilla-Notifications",
@@ -22,7 +20,6 @@
   {
     "Name": "ZlothY Nametag",
     "Author": "ZlothY",
-    "Version": "1.5.3",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Zlothy-Nametag",
@@ -32,7 +29,6 @@
   {
     "Name": "Too Much Info",
     "Author": "ZlothY",
-    "Version": "1.2.1",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "TooMuchInfoHanFork",
@@ -42,7 +38,6 @@
   {
     "Name": "Casting Should Be Free",
     "Author": "ZlothY",
-    "Version": "1.2.0",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Casting-Should-Be-Free",
@@ -52,7 +47,6 @@
   {
     "Name": "Walk Simulator",
     "Author": "ZlothY",
-    "Version": "1.0.9",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "WalkSimulator",
@@ -62,7 +56,6 @@
   {
     "Name": "ZlothY Dances",
     "Author": "ZlothY",
-    "Version": "2.1.0",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "ZlothYDances",
@@ -72,7 +65,6 @@
   {
     "Name": "Sentinel",
     "Author": "ZlothY & Not",
-    "Version": "1.1.0",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "Sentinel",
@@ -82,7 +74,6 @@
   {
     "Name": "Automatic Reporting System(ARS)",
     "Author": "Industry",
-    "Version": "1.2.1",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
     "git_path": "ARS-Files",

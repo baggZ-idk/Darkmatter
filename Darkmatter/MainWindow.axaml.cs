@@ -331,57 +331,124 @@ public partial class MainWindow : Window
         // made it like this because i might add more later but idk
     };
 
+    private static readonly HttpClient Http = new();
+
+    private static readonly string RepositoryConfigPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "Darkmatter",
+        "repositories.json");
+
     public async Task LoadModsFromTheNewGitHubRepoAsync()
     {
-        using var client = new HttpClient();
-        const string url = "https://raw.githubusercontent.com/baggZ-idk/Darkmatter/refs/heads/main/Data/modinfo.json";
-
         try
         {
-            var json = await client.GetStringAsync(url);
-            var mods = JsonConvert.DeserializeObject<List<Mod>>(json);
+            Directory.CreateDirectory(
+                Path.GetDirectoryName(RepositoryConfigPath)!);
+
+            if (!File.Exists(RepositoryConfigPath))
+            {
+                var defaults = new List<Repository>
+                {
+                    new()
+                    {
+                        Name = "Darkmatter Official",
+                        Url = "https://raw.githubusercontent.com/baggZ-idk/Darkmatter/refs/heads/main/Data/modinfo.json",
+                        Enabled = true
+                    }
+                };
+
+                await File.WriteAllTextAsync(
+                    RepositoryConfigPath,
+                    JsonConvert.SerializeObject(defaults, Formatting.Indented));
+            }
+
+            var repositories = JsonConvert.DeserializeObject<List<Repository>>(
+                await File.ReadAllTextAsync(RepositoryConfigPath))
+                ?? new List<Repository>();
+
+            var allMods = new List<Mod>();
+            int failedRepositories = 0;
+
+            foreach (var repository in repositories.Where(r => r.Enabled))
+            {
+                try
+                {
+                    if (!Uri.TryCreate(repository.Url, UriKind.Absolute, out var uri)
+                        || uri.Scheme != Uri.UriSchemeHttps)
+                    {
+                        throw new InvalidOperationException(
+                            "Repository URL must use HTTPS.");
+                    }
+
+                    var json = await Http.GetStringAsync(uri);
+                    var mods = JsonConvert.DeserializeObject<List<Mod>>(json);
+
+                    if (mods == null)
+                        throw new InvalidDataException("Invalid mod list JSON.");
+
+                    allMods.AddRange(mods);
+
+                    Console.WriteLine(
+                        $"Loaded {mods.Count} mods from {repository.Name}");
+                }
+                catch (Exception ex)
+                {
+                    failedRepositories++;
+                    Console.WriteLine(
+                        $"Failed to load {repository.Name}: {ex.Message}");
+                }
+            }
+
             Mods.Clear();
             ItemControl0.Items.Clear();
 
-            if (mods != null)
+            var filtered = allMods
+                .Where(m => !BlacklistedMods.Contains(
+                    m.Name, StringComparer.OrdinalIgnoreCase))
+                .ToList();
+
+            var grouped = filtered
+                .GroupBy(m => string.IsNullOrWhiteSpace(m.Group)
+                    ? "Uncategorized"
+                    : m.Group)
+                .OrderBy(g => g.Key);
+
+            foreach (var group in grouped)
             {
-                int loadedCount = 0;
-                int blacklistedCount = 0;
+                AddHeader($"-- {group.Key} --");
 
-                var filtered = mods
-                    .Where(m => !BlacklistedMods.Contains(m.Name, StringComparer.OrdinalIgnoreCase))
-                    .ToList();
-
-                blacklistedCount = mods.Count - filtered.Count;
-
-                var grouped = filtered
-                    .GroupBy(m => string.IsNullOrWhiteSpace(m.Group) ? "Uncategorized" : m.Group)
-                    .OrderBy(g => g.Key);
-
-                foreach (var group in grouped)
+                foreach (var mod in group.OrderBy(m => m.Name))
                 {
-                    AddHeader($"-- {group.Key} --");
-                    foreach (var mod in group.OrderBy(m => m.Name))
-                    {
-                        Mods.Add(mod);
-                        var modControl = MakeModControl(mod);
-                        ItemControl0.Items.Add(modControl);
-                        loadedCount++;
-                    }
+                    Mods.Add(mod);
+                    ItemControl0.Items.Add(MakeModControl(mod));
                 }
+            }
 
-                Console.WriteLine($"loaded {loadedCount} mods, skipped {blacklistedCount} blacklisted mods");
-                // even counting!! not that anyone will read this but yeah
+            Console.WriteLine(
+                $"Loaded {filtered.Count} mods; " +
+                $"skipped {allMods.Count - filtered.Count} blacklisted mods; " +
+                $"{failedRepositories} repositories failed.");
+
+            if (repositories.Count(r => r.Enabled) == 0)
+            {
+                await ShowErrorMessage("No repositories are enabled.");
+            }
+            else if (allMods.Count == 0 && failedRepositories > 0)
+            {
+               await ShowErrorMessage(
+                    "Couldn't load mods from any enabled repository.");
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Loading mods failed: {ex.Message}");
-            await ShowErrorMessage("Couldn't load the mod list from GitHub.");
+            await ShowErrorMessage("Couldn't load the mod list.");
         }
+
         closeStartWindow();
         Opacity = 1;
     }
+
     
     private void SearchBox_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
@@ -436,11 +503,6 @@ public partial class MainWindow : Window
                     foreach (var mod in group.OrderBy(m => m.Name))
                         ItemControl0.Items.Add(MakeModControl(mod));
                 }
-                break;
-
-            case 3:
-                foreach (var mod in filtered.OrderByDescending(m => m.Version))
-                    ItemControl0.Items.Add(MakeModControl(mod));
                 break;
         }
     }
@@ -585,7 +647,7 @@ public partial class MainWindow : Window
 
         var nameTextBlock = new TextBlock
         {
-            Text = mod.DisplayName,
+            Text = mod.Name,
             FontSize = 18,
             FontWeight = FontWeight.Bold
         };
@@ -1107,7 +1169,7 @@ public partial class MainWindow : Window
             installButton.Content = "Reinstall";
             installButton.Background = Brushes.Orange;
 
-            MessageBox0.Text = $"Successfully installed {mod.Name} v{mod.Version}!";
+            MessageBox0.Text = $"Successfully installed {mod.Name}!";
         }
         catch (Exception ex)
         {
@@ -1130,7 +1192,7 @@ public partial class MainWindow : Window
                 {
                     if (modBorder.ModAssigned != ModSender)
                     {
-                        if (modBorder.ModAssigned.ModName == dependency)
+                        if (modBorder.ModAssigned.Name == dependency)
                         {
                             await InstallMod(modBorder.ModAssigned, modBorder.InstallButton, modBorder.StatusText, mod);
                         }
@@ -1802,6 +1864,16 @@ public partial class MainWindow : Window
             _ = ShowErrorMessage("Failed to launch game: " + ex.Message + "\nplease note that the launch game feature is steam only");
         }
     }
+    
+    private async void ManageRepositories_OnClick(
+        object? sender, RoutedEventArgs e)
+    {
+        var window = new RepositoriesWindow();
+        var saved = await window.ShowDialog<bool?>(this);
+
+        if (saved == true)
+            await LoadModsFromTheNewGitHubRepoAsync();
+    }
 
     private void InstallFromDiskBtn_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -1903,7 +1975,6 @@ public class Mod
 {
     public string Name { get; set; }
     public string Author { get; set; }
-    public string Version { get; set; }
     public List<string> Dependencies { get; set; } = new List<string>();
     public List<Mod> DependenciesAsMod { get; set; } = new List<Mod>();
     [JsonProperty("install_location")]
@@ -1913,11 +1984,15 @@ public class Mod
     public string Group { get; set; }
     [JsonProperty("download_url")]
     public string DownloadUrl { get; set; }
-
-    public string ModName => Name;
     public string URL => DownloadUrl;
-    public string DisplayName => $"{Name} v{Version}";
     public string AuthorInfo => !string.IsNullOrEmpty(Author) ? $"by {Author}" : "";
+}
+
+public class Repository
+{
+    public string Name { get; set; } = "";
+    public string Url { get; set; } = "";
+    public bool Enabled { get; set; } = true;
 }
 
 public class Config

@@ -8,7 +8,7 @@
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <PublishSingleFile>true</PublishSingleFile>
         <DebugType>embedded</DebugType>
-        <RootNamespace>MonkeModManager</RootNamespace>
+        <RootNamespace>Darkmatter</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
