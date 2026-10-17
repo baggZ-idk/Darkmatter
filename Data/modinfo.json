@@ -12,11 +12,11 @@
   {
     "Name": "GorillaNotifications",
     "Author": "hamburbur org",
-    "Version": "7.3.1",
+    "Version": "1.0.2",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "hamburbur",
-    "Group": "mod menu",
-    "download_url": "https://github.com/hamburbur-org/hamburbur/releases/latest/download/hamburbur.dll"
+    "git_path": "Gorilla-Notifications",
+    "Group": "libraries",
+    "download_url": "https://github.com/hamburbur-org/Gorilla-Notifications/releases/latest/download/GorillaNotifications.dll"
   }
 ]
