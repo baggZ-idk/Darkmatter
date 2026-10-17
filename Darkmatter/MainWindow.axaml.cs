@@ -334,7 +334,7 @@ public partial class MainWindow : Window
     public async Task LoadModsFromTheNewGitHubRepoAsync()
     {
         using var client = new HttpClient();
-        const string url = "https://raw.githubusercontent.com/The-Graze/MonkeModInfo/master/modinfo.json";
+        const string url = "https://raw.githubusercontent.com/baggZ-idk/Darkmatter/refs/heads/main/Data/modinfo.json";
 
         try
         {
@@ -463,49 +463,6 @@ public partial class MainWindow : Window
             return;
 
         ApplyFilter(SearchBox?.Text ?? "");
-    }
-    
-    public async Task fixBepInExConfig()
-    {
-        string url = "https://raw.githubusercontent.com/The-Graze/MonkeModInfo/master/BepInEx.cfg";
-        string configPath = Path.Combine(gamePath, "BepInEx", "config", "BepInEx.cfg");
-
-        try
-        {
-            using var client = new HttpClient();
-            var configContent = await client.GetStringAsync(url);
-            Directory.CreateDirectory(Path.GetDirectoryName(configPath)!);
-            await File.WriteAllTextAsync(configPath, configContent);
-
-            Console.WriteLine("yay i did a thing!");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"never mind, it didnt work :sob: {ex.Message}");
-            await ShowErrorMessage("it didnt work. error code: 50000000");
-        }
-    }
-
-    async Task FixUEConfig()
-    {
-        string url =
-            "https://raw.githubusercontent.com/arielthemonke/ModInfo/refs/heads/main/com.sinai.unityexplorer.cfg";
-        string configPath = Path.Combine(gamePath, "BepInEx", "config", "com.sinai.unityexplorer.cfg");
-
-        try
-        {
-            using var client = new HttpClient();
-            var configContent = await client.GetStringAsync(url);
-            Directory.CreateDirectory(Path.GetDirectoryName(configPath)!);
-            await File.WriteAllTextAsync(configPath, configContent);
-
-            Console.WriteLine("yay i did a thing! x2");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"never mind, it didnt work :sob: {ex.Message}");
-            await ShowErrorMessage("it didnt work. error code: 50000001");
-        }
     }
     #endregion
 
@@ -1378,8 +1335,6 @@ public partial class MainWindow : Window
                 await ExtractBepInEx(tempPath);
                 
                 File.Delete(tempPath);
-                await fixBepInExConfig();
-                await FixUEConfig();
                 MessageBox0.Text = "BepInEx installed successfully!";
                 
                 return true;
