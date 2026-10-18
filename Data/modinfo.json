@@ -5,7 +5,7 @@
     "Author": "ZlothY",
     "Dependencies": ["GorillaNotifications"],
     "install_location": "BepInEx/plugins",
-    "git_path": "hamburbur",
+    "git_path": "hamburbur-org/hamburbur",
     "Group": "Mod Menu",
     "download_url": "https://github.com/hamburbur-org/hamburbur/releases/latest/download/Hamburbur.dll"
   },
@@ -14,7 +14,7 @@
     "Author": "ZlothY",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "Gorilla-Notifications",
+    "git_path": "hamburbur-org/Gorilla-Notifications",
     "Group": "Libraries",
     "download_url": "https://github.com/hamburbur-org/Gorilla-Notifications/releases/latest/download/GorillaNotifications.dll"
   },
@@ -23,7 +23,7 @@
     "Author": "ZlothY",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "Zlothy-Nametag",
+    "git_path": "ZlothY/ZlothYNametag",
     "Group": "Cosmetic",
     "download_url": "https://git.hamburbur.org/ZlothY/ZlothYNametag/releases/download/latest/ZlothYNametag.dll"
   },
@@ -32,7 +32,7 @@
     "Author": "poopooVR",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "ForeverCosmetxx",
+    "git_path": "iiDkRemastered/ForeverCosmetxx",
     "Group": "Cosmetic",
     "download_url": "https://github.com/iiDkRemastered/ForeverCosmetxx/releases/latest/download/ForeverCosmetx.dll"
   },
@@ -41,7 +41,7 @@
     "Author": "ZlothY",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "TooMuchInfoHanFork",
+    "git_path": "ZlothY/TooMuchInfo",
     "Group": "Cosmetic",
     "download_url": "https://git.hamburbur.org/ZlothY/TooMuchInfo/releases/download/latest/TooMuchInfo.dll"
   },
@@ -50,7 +50,7 @@
     "Author": "ZlothY",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "Casting-Should-Be-Free",
+    "git_path": "hamburbur-org/Casting-Should-Be-Free",
     "Group": "Competitive",
     "download_url": "https://github.com/hamburbur-org/Casting-Should-Be-Free/releases/latest/download/CastingShouldBeFree.dll"
   },
@@ -59,7 +59,7 @@
     "Author": "ZlothY",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "WalkSimulator",
+    "git_path": "ZlothY/WalkSimulator",
     "Group": "Gameplay",
     "download_url": "https://git.hamburbur.org/ZlothY/WalkSimulator/releases/download/latest/WalkSimulator.dll"
   },
@@ -68,7 +68,7 @@
     "Author": "ZlothY & Not",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "Sentinel",
+    "git_path": "gorillan0t/Sentinel",
     "Group": "Mod Checker",
     "download_url": "https://github.com/gorillan0t/Sentinel/releases/latest/download/SentinelClient.dll"
   },
@@ -77,7 +77,7 @@
     "Author": "Industry",
     "Dependencies": [],
     "install_location": "BepInEx/plugins",
-    "git_path": "ARS-Files",
+    "git_path": "AutoReportSystem/ARS-Files",
     "Group": "Quality of Life",
     "download_url": "https://github.com/AutoReportSystem/ARS-Files/releases/latest/download/ARS.dll"
   }
