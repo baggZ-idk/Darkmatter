@@ -374,10 +374,11 @@ public partial class MainWindow : Window
                 try
                 {
                     if (!Uri.TryCreate(repository.Url, UriKind.Absolute, out var uri)
-                        || uri.Scheme != Uri.UriSchemeHttps)
+                        || (uri.Scheme != Uri.UriSchemeHttps &&
+                            uri.Scheme != Uri.UriSchemeHttp))
                     {
                         throw new InvalidOperationException(
-                            "Repository URL must use HTTPS.");
+                            "Repository URL must use HTTP or HTTPS.");
                     }
 
                     var json = await Http.GetStringAsync(uri);

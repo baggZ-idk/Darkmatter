@@ -80,5 +80,14 @@
     "git_path": "AutoReportSystem/ARS-Files",
     "Group": "Quality of Life",
     "download_url": "https://github.com/AutoReportSystem/ARS-Files/releases/latest/download/ARS.dll"
+  },
+  {
+    "Name": "Unity Explorer",
+    "Author": "sinai dev",
+    "Dependencies": [],
+    "install_location": "BepInEx",
+    "git_path": "sinai-dev/UnityExplorer",
+    "Group": "Mod Menu",
+    "download_url": "https://github.com/sinai-dev/UnityExplorer/releases/download/4.9.0/UnityExplorer.BepInEx5.Mono.zip"
   }
 ]

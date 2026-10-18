@@ -129,9 +129,9 @@ public partial class RepositoriesWindow : Window
         var url = RepositoryUrlBox.Text?.Trim();
 
         if (!Uri.TryCreate(url, UriKind.Absolute, out var uri)
-            || uri.Scheme != Uri.UriSchemeHttps)
+            || uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp)
         {
-            await ShowMessage("Enter a valid HTTPS repository URL.");
+            await ShowMessage("Enter a valid HTTP/HTTPS repository URL.");
             return;
         }
 
