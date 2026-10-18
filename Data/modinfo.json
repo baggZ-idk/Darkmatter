@@ -64,15 +64,6 @@
     "download_url": "https://git.hamburbur.org/ZlothY/WalkSimulator/releases/download/latest/WalkSimulator.dll"
   },
   {
-    "Name": "ZlothY Dances",
-    "Author": "ZlothY",
-    "Dependencies": [],
-    "install_location": "BepInEx/plugins",
-    "git_path": "ZlothYDances",
-    "Group": "Gameplay",
-    "download_url": "https://git.hamburbur.org/ZlothY/ZlothYDances/releases/download/latest/ZlothYDances.dll"
-  },
-  {
     "Name": "Sentinel",
     "Author": "ZlothY & Not",
     "Dependencies": [],
