@@ -270,7 +270,7 @@ public partial class MainWindow : Window
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "ModManager");
 
-            string url = "https://raw.githubusercontent.com/arielthemonke/Darkmatter/main/version";
+            string url = "https://raw.githubusercontent.com/baggZ-idk/Darkmatter/refs/heads/main/version";
             string response = await client.GetStringAsync(url);
             var latestVersion = Version.Parse(response);
 
