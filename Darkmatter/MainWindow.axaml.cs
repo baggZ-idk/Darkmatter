@@ -110,7 +110,7 @@ public partial class MainWindow : Window
         }
         pluginsPath = Path.Combine(gamePath, "BepInEx", "plugins");
 
-        var (updateAvailable, newVersion) = await IsUpdateAvailable(new Version(1, 0, 0));
+        var (updateAvailable, newVersion) = await IsUpdateAvailable(new Version(1, 0, 1));
 
         if (updateAvailable)
         {
@@ -1840,7 +1840,7 @@ public partial class MainWindow : Window
         };
         installBtn.Click += async (sender, e) =>
         {
-            var url = "https://github.com/arielthemonke/Darkmatter/releases/latest";
+            var url = "https://github.com/baggZ-idk/Darkmatter/releases/latest";
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         };
 
